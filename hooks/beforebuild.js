@@ -6,11 +6,12 @@ console.log('test2')
 const archiver = require(path.join(__dirname, '../../../node_modules/archiver'));
 const axios = require(path.join(__dirname, '../../../node_modules/axios'));
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));*/
-import archiver from '../../../node_modules/archiver';
+//import archiver from '../../../node_modules/archiver';
+const archiver = require(path.join(__dirname, '../../../node_modules/archiver'));
 import axios from '../../../node_modules/axios';
 import FormData from '../../../node_modules/form-data';
 
-module.exports = function(context) {
+export default function(context) {
     /*const currentDir = path.join(__dirname, '../../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
