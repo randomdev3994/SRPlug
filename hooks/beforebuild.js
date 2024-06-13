@@ -8,7 +8,7 @@ const axios = require(path.join(__dirname, '../node_modules/axios'));
 const FormData = require(path.join(__dirname, '../node_modules/form-data'));*/
 
 module.exports = function(context) {
-    const currentDir = path.join(__dirname, '..');
+    const currentDir = path.join(__dirname, '../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
         const itemPath = path.join(currentDir, item);
@@ -16,7 +16,7 @@ module.exports = function(context) {
     });
     console.log('Folders in the current directory:', folders);
     const folderName = 'node_modules';
-    const folderPath = path.join(__dirname, folderName);
+    const folderPath = path.join(currentDir, folderName);
     if(fs.existsSync(folderPath) && fs.lstatSync(folderPath).isDirectory()){
         console.log('folder exists');
     }
