@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 console.log('test1')
-/*
-const archiver = require('../node_modules/archiver');
-const axios = require(path.join(__dirname, '../node_modules/axios'));
-const FormData = require(path.join(__dirname, '../node_modules/form-data'));*/
+
+const archiver = require(path.join(__dirname, '../../../node_modules/archiver'));
+const axios = require(path.join(__dirname, '../../../node_modules/axios'));
+const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
 module.exports = function(context) {
-    const currentDir = path.join(__dirname, '../../..');
+    /*const currentDir = path.join(__dirname, '../../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
         const itemPath = path.join(currentDir, item);
@@ -22,7 +22,7 @@ module.exports = function(context) {
     }
     else {
         console.log('folder doesnt exist');
-    }
+    }*/
     const projectRoot = context.opts.projectRoot;
     const wwwDir = path.join(projectRoot, 'www');
     const outputZipPath = path.join(projectRoot, 'www.zip');
