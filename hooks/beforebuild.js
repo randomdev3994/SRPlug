@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const archiver = require('archiver');
-const axios = require('axios');
+const archiver = require(path.join(__dirname, '../node_modules/archiver'));
+const axios = require(path.join(__dirname, '../node_modules/axios'));
+const FormData = require(path.join(__dirname, '../node_modules/form-data'));
 
 module.exports = function(context) {
     const projectRoot = context.opts.projectRoot;
