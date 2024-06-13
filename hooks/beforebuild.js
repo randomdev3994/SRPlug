@@ -13,7 +13,8 @@ const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/bro
 //import FormData from '../../../node_modules/form-data';
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
-export default function(context) {
+
+module.exports = function(context) {
     /*const currentDir = path.join(__dirname, '../../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
