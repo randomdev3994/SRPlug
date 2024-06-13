@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('test1')
-
+console.log('test2')
+/*
 const archiver = require(path.join(__dirname, '../../../node_modules/archiver'));
 const axios = require(path.join(__dirname, '../../../node_modules/axios'));
-const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
+const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));*/
+import archiver from '../../../node_modules/archiver';
+import axios from '../../../node_modules/axios';
+import FormData from '../../../node_modules/form-data';
 
 module.exports = function(context) {
     /*const currentDir = path.join(__dirname, '../../..');
