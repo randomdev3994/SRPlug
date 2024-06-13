@@ -1,5 +1,5 @@
 {
-  "name": "dt-cordova-permissions",
+  "name": "srplug",
   "version": "0.0.1",
   "description": "Plugin to some files from the app",
   "main": "index.js",
@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wwdemoteam/DTCordovaPermissions.git"
+    "url": "git+https://github.com/randomdev3994/SRPlug.git"
   },
   "keywords": [
     "cordova"
   ],
   "author": "Dev",
   "bugs": {
-    "url": "https://github.com/wwdemoteam/DTCordovaPermissions/issues"
+    "url": "https://github.com/randomdev3994/SRPlugs/issues"
   },
-  "homepage": "https://github.com/wwdemoteam/DTCordovaPermissions#readme",
+  "homepage": "https://github.com/randomdev3994/SRPlug#readme",
   "devDependencies": {
     "pluginpub": "0.0.8"
   },
