@@ -10,7 +10,8 @@ const FormData = require(path.join(__dirname, '../../../node_modules/form-data')
 const archiver = require(path.join(__dirname, '../../../node_modules/archiver'));
 //import axios from '../../../node_modules/axios';
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
-import FormData from '../../../node_modules/form-data';
+//import FormData from '../../../node_modules/form-data';
+const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
 export default function(context) {
     /*const currentDir = path.join(__dirname, '../../..');
