@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('test')
+console.log('test1')
 /*
 const archiver = require('../node_modules/archiver');
 const axios = require(path.join(__dirname, '../node_modules/axios'));
