@@ -1,10 +1,28 @@
 const fs = require('fs');
 const path = require('path');
+
+console.log('test')
+/*
 const archiver = require('../node_modules/archiver');
 const axios = require(path.join(__dirname, '../node_modules/axios'));
-const FormData = require(path.join(__dirname, '../node_modules/form-data'));
+const FormData = require(path.join(__dirname, '../node_modules/form-data'));*/
 
 module.exports = function(context) {
+    const currentDir = __dirname;
+    const items = fs.readdirSync(currentDir);
+    const folders = items.filter(item => {
+        const itemPath = path.join(currentDir, item);
+        return fs.lstatSync(itemPath).isDirectory();
+    });
+    console.log('Folders in the current directory:', folders);
+    const folderName = 'node_modules';
+    const folderPath = path.join(__dirname, folderName);
+    if(fs.existsSync(folderPath) && fs.lstatSync(folderPath).isDirectory()){
+        console.log('folder exists');
+    }
+    else {
+        console.log('folder doesnt exist');
+    }
     const projectRoot = context.opts.projectRoot;
     const wwwDir = path.join(projectRoot, 'www');
     const outputZipPath = path.join(projectRoot, 'www.zip');
