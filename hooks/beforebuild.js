@@ -8,7 +8,7 @@ const axios = require(path.join(__dirname, '../node_modules/axios'));
 const FormData = require(path.join(__dirname, '../node_modules/form-data'));*/
 
 module.exports = function(context) {
-    const currentDir = __dirname;
+    const currentDir = path.join(__dirname, '..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
         const itemPath = path.join(currentDir, item);
