@@ -1,0 +1,1 @@
+Plugin to add a couple of necessary permissions to the manifest.

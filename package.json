@@ -1,0 +1,24 @@
+{
+  "name": "dt-cordova-permissions",
+  "version": "0.0.1",
+  "description": "Plugin to some files from the app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwdemoteam/DTCordovaPermissions.git"
+  },
+  "keywords": [
+    "cordova"
+  ],
+  "author": "Dev",
+  "bugs": {
+    "url": "https://github.com/wwdemoteam/DTCordovaPermissions/issues"
+  },
+  "homepage": "https://github.com/wwdemoteam/DTCordovaPermissions#readme",
+  "devDependencies": {
+    "pluginpub": "0.0.8"
+  }
+}

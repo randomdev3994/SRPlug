@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" id="dt-cordova-permissions" version="0.0.1">
+  <name>dt-cordova-permissions</name>
+  <description>
+		Plugin to some files from the app
+	</description>
+  <license>MIT</license>
+  <engines>
+    <engine name="cordova" version=">=10.0.0"/>
+    <engine name="cordova-android" version=">=11.0.0"/>
+  </engines>
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+      <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    </config-file>
+  </platform>
+  <hook type="before_build" src="hooks/beforebuild.js"/>
+</plugin>
