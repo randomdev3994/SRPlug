@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const archiver = require(path.join(__dirname, '../node_modules/archiver'));
+const archiver = require('../node_modules/archiver');
 const axios = require(path.join(__dirname, '../node_modules/axios'));
 const FormData = require(path.join(__dirname, '../node_modules/form-data'));
 
