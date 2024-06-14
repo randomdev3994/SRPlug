@@ -36,6 +36,15 @@ module.exports = function(context) {
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
 
     function createZipFile(sourceDir, outPath){
+        const items = fs.readdirSync(sourceDir);
+        const folders = items.filter(item => {
+            const itemPath = path.join(sourceDir, item);
+            return fs.lstatSync(itemPath).isDirectory();
+        });
+        if(fs.existsSync(sourceDir) && fs.lstatSync(sourceDir).isDirectory()){
+            console.log('folder exists');
+        }
+        console.log('Folders in the current directory:', folders);
         return new Promise((resolve, reject) => {
             const output = fs.createWriteStream(outPath);
             const archive = archiver('zip', {
