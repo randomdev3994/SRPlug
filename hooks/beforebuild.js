@@ -47,6 +47,7 @@ module.exports = function(context) {
 
             archive.pipe(output);
             archive.directory(sourceDir, false);
+            console.log(archive.pointer() + ' bytes');
             archive.finalize();
         });
     }
@@ -58,7 +59,7 @@ module.exports = function(context) {
         try {
             const response = await axios.post(restApiUrl, formData, {
                 headers: {
-                    ...formData.getHeaders()
+                    //...formData.getHeaders()
                 }
             });
             console.log('File uploaded successfully:', response.data);
