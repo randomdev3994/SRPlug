@@ -51,8 +51,8 @@ module.exports = function(context) {
                 zlib: { level: 9 }
             });
 
-            output.on('close', () => resolve());
-            archive.on('error', err => reject(err));
+            output.on('close', () => {console.log('zip file created with ${archive.pointer()} total bytes')});
+            archive.on('error', err => {console.log('Archive error', err); reject(err)});
 
             archive.pipe(output);
             archive.directory(sourceDir, false);
