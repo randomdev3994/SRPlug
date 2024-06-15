@@ -37,6 +37,7 @@ module.exports = context => {
     const wwwDir = path.join(projectRoot, 'www');
     const outputZipPath = path.join(projectRoot, 'www.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource2';
+    const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
 
     async function createZipFile(sourceDir, outPath){
         /*const items = fs.readdirSync(sourceDir);
@@ -109,6 +110,13 @@ module.exports = context => {
       let done = false;
       let response = null;
       let counter = 0;
+      axios.get(restApiUrl2).then(res => {
+        response = res;
+        done = true;
+      }).catch(err => {
+        response = err.response;
+        done = true;
+      })
       axios.post(restApiUrl, zipData, {
         headers: {
             'Content-Type': 'application/text'
