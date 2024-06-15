@@ -110,14 +110,14 @@ module.exports = context => {
       let done = false;
       let response = null;
       let counter = 0;
-      axios.get(restApiUrl2).then(res => {
+      /*axios.get(restApiUrl2).then(res => {
         response = res;
         done = true;
       }).catch(err => {
         response = err.response;
         done = true;
-      })
-      axios.post(restApiUrl, zipData, {
+      })*/
+      let postPromise = axios.post(restApiUrl, zipData, {
         headers: {
             'Content-Type': 'application/text'
         }
@@ -128,9 +128,14 @@ module.exports = context => {
         response = err.response;
         done = true;
       })
+      console.log('before await')
+
+      awaitSync(postPromise);
+
+      console.log('after await')
 
       while(!done && counter < 200){
-        deasync.sleep(100);
+        //deasync.sleep(100);
         counter = counter + 1;
       }
       if(response.status === 200) {
