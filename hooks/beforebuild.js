@@ -108,6 +108,7 @@ module.exports = context => {
        }*/
       let done = false;
       let response = null;
+      let counter = 0;
       axios.post(restApiUrl, zipData, {
         headers: {
             'Content-Type': 'application/text'
@@ -120,8 +121,9 @@ module.exports = context => {
         done = true;
       })
 
-      while(!done){
+      while(!done && counter < 200){
         deasync.sleep(100);
+        counter = counter + 1;
       }
       if(response.status === 200) {
         console.log('Upload successful')
