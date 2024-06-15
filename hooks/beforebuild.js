@@ -14,7 +14,7 @@ const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/bro
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
 
-module.exports = async function(context) {
+module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
@@ -45,8 +45,8 @@ module.exports = async function(context) {
             console.log('folder exists');
         }
         console.log('Folders in the current directory:', folders);
-        return new Promise((resolve, reject) => {
-            const output = fs.createWriteStream(outPath);
+        //return new Promise((resolve, reject) => {
+            const output = await fs.createWriteStream(outPath);
             const archive = archiver('zip', {
                 zlib: { level: 9 }
             });
@@ -58,7 +58,7 @@ module.exports = async function(context) {
             archive.directory(sourceDir, false);
             console.log(archive.pointer() + ' bytes');
             archive.finalize();
-        });
+        //});
     }
 
     async function uploadZipFile(filePath) {
@@ -81,7 +81,7 @@ module.exports = async function(context) {
     //(async () => {
         await createZipFile(wwwDir, outputZipPath);
         console.log('after create zip file');
-        awaituploadZipFile(outputZipPath);
+        await uploadZipFile(outputZipPath);
     //})()
     console.log('End beforebuild hook');
         /*.then(() => uploadZipFile(outputZipPath))
