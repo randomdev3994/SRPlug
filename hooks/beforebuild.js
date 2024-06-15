@@ -78,7 +78,7 @@ module.exports = context => {
     async function uploadZipFile(filePath) {
         console.log('start upload');
         const formData = new FormData();
-        formData.append('file', fs.createReadStream(filePath));
+        formData.append('file', fs.readFileSync(filePath));
 
         try {
             const response = await axios.post(restApiUrl, formData, {
