@@ -13,6 +13,8 @@ const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/bro
 //import FormData from '../../../node_modules/form-data';
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
+const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
+
 
 module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
@@ -36,7 +38,7 @@ module.exports = context => {
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
 
     async function createZipFile(sourceDir, outPath){
-        const items = fs.readdirSync(sourceDir);
+        /*const items = fs.readdirSync(sourceDir);
         const folders = items.filter(item => {
             const itemPath = path.join(sourceDir, item);
             return fs.lstatSync(itemPath).isDirectory();
@@ -45,7 +47,6 @@ module.exports = context => {
             console.log('folder exists');
         }
         console.log('Folders in the current directory:', folders);
-        //return new Promise((resolve, reject) => {
             const output = await fs.createWriteStream(outPath);
             const archive = archiver('zip', {
                 zlib: { level: 9 }
@@ -58,7 +59,20 @@ module.exports = context => {
             archive.directory(sourceDir, false);
             console.log(archive.pointer() + ' bytes');
             archive.finalize();
-        //});
+*/
+        const zip = new AdmZip();
+        const files = fs.readdirSync(sourceDir);
+        files.forEach(file => {
+            const filePath = path.join(sourceDir, file);
+            const stat = fs.statSync(filePath);
+            if(stat.isFile()){
+                zip.addLocalFile(filePath);
+            } else if(stat.isDirectory()){
+                zip.addLocalFolder(filePath, path.relative(sourceDir, filePath));
+            }
+        })
+        zip.writeZip(outputPath);
+        console.log(`Folder ${sourceDir} has been zipped to ${outputPath}`)
     }
 
     async function uploadZipFile(filePath) {
