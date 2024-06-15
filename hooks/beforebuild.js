@@ -135,7 +135,7 @@ module.exports = context => {
 
       while(!done && counter < 200){
         deasync.sleep(100);
-        console.log(new Date.now() + ' ' + counter)
+        console.log(Date() + ' ' + counter)
         counter = counter + 1
       }
       if(response.status === 200) {
