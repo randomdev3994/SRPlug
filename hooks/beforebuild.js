@@ -84,7 +84,7 @@ module.exports = context => {
         await uploadZipFile(outputZipPath);
         console.log('after uploading zip file');
         resolve('promise done');
-    })()}).then(() => {console.log('then promise'})
+    })()}).then(() => {console.log('then promise')})
     //})()
     console.log('End beforebuild hook');
         /*.then(() => uploadZipFile(outputZipPath))
