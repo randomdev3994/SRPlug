@@ -35,7 +35,7 @@ module.exports = context => {
     const projectRoot = context.opts.projectRoot;
     const wwwDir = path.join(projectRoot, 'www');
     const outputZipPath = path.join(projectRoot, 'www.zip');
-    const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
+    const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource2';
 
     async function createZipFile(sourceDir, outPath){
         /*const items = fs.readdirSync(sourceDir);
@@ -90,10 +90,11 @@ module.exports = context => {
         } catch(error) {
             console.error('Error uploading file:', error);
         }*/
-       const zipData = fs.readFileSync(filePath);
+       let zipData = fs.readFileSync(filePath);
+       zipData = zipData.toString('base64');
        const res = request('POST', restApiUrl, {
         headers: {
-            'Content-Type': 'application/zip'
+            'Content-Type': 'application/text'
         },
         body: zipData
        });
