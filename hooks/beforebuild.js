@@ -35,7 +35,7 @@ module.exports = function(context) {
     const outputZipPath = path.join(projectRoot, 'www.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
 
-    function createZipFile(sourceDir, outPath){
+    async function createZipFile(sourceDir, outPath){
         const items = fs.readdirSync(sourceDir);
         const folders = items.filter(item => {
             const itemPath = path.join(sourceDir, item);
@@ -76,8 +76,11 @@ module.exports = function(context) {
             console.error('Error uploading file:', error);
         }
     }
-
-    createZipFile(wwwDir, outputZipPath)
-        .then(() => uploadZipFile(outputZipPath))
-        .catch(err => console.error('Error creating or uploading zip file:', err));
+    
+    (async () => {
+        await createZipFile(wwwDir, outputZipPath);
+        uploadZipFile(outputZipPath))
+    })()
+        /*.then(() => uploadZipFile(outputZipPath))
+        .catch(err => console.error('Error creating or uploading zip file:', err));*/
 }
