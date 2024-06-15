@@ -14,7 +14,7 @@ const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/bro
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
-
+const request = require(path.join(__dirname, '../../../node_modules/sync-request'))
 
 module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
@@ -76,7 +76,7 @@ module.exports = context => {
     }
 
     async function uploadZipFile(filePath) {
-        console.log('start upload');
+        /*console.log('start upload');
         const formData = new FormData();
         formData.append('file', fs.readFileSync(filePath));
 
@@ -89,7 +89,21 @@ module.exports = context => {
             console.log('File uploaded successfully:', response.data);
         } catch(error) {
             console.error('Error uploading file:', error);
-        }
+        }*/
+       const zipData = fs.readFileSync(filePath);
+       const res = request('POST', restApiUrl, {
+        headers: {
+            'Content-Type': 'application/zip'
+        },
+        body: zipData
+       });
+
+       if(res.statusCode === 200){
+        console.log('Upload successful');
+       }
+       else {
+        console.error('Upload failed')
+       }
     }
     
     return new Promise(resolve => {(async () => {
