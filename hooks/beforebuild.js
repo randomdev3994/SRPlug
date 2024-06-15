@@ -130,13 +130,12 @@ module.exports = context => {
       })
       console.log('before await')
 
-      awaitSync(postPromise);
 
-      console.log('after await')
+    
 
       while(!done && counter < 200){
-        //deasync.sleep(100);
-        counter = counter + 1;
+        deasync.sleep(100);
+        console.log(new Date.now())
       }
       if(response.status === 200) {
         console.log('Upload successful')
