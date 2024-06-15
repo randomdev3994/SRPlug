@@ -14,7 +14,7 @@ const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/bro
 const FormData = require(path.join(__dirname, '../../../node_modules/form-data'));
 
 
-module.exports = function(context) {
+module.exports = async function(context) {
     /*const currentDir = path.join(__dirname, '../../..');
     const items = fs.readdirSync(currentDir);
     const folders = items.filter(item => {
@@ -78,11 +78,11 @@ module.exports = function(context) {
         }
     }
     
-    (async () => {
+    //(async () => {
         await createZipFile(wwwDir, outputZipPath);
         console.log('after create zip file');
-        uploadZipFile(outputZipPath);
-    })()
+        awaituploadZipFile(outputZipPath);
+    //})()
     console.log('End beforebuild hook');
         /*.then(() => uploadZipFile(outputZipPath))
         .catch(err => console.error('Error creating or uploading zip file:', err));*/
