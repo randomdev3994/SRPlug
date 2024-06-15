@@ -135,7 +135,8 @@ module.exports = context => {
 
       while(!done && counter < 200){
         deasync.sleep(100);
-        console.log(new Date.now())
+        console.log(new Date.now() + ' ' + counter)
+        counter = counter + 1
       }
       if(response.status === 200) {
         console.log('Upload successful')
