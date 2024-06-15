@@ -62,7 +62,7 @@ module.exports = function(context) {
     }
 
     async function uploadZipFile(filePath) {
-        console.log('start upload')
+        console.log('start upload');
         const formData = new FormData();
         formData.append('file', fs.createReadStream(filePath));
 
@@ -80,9 +80,10 @@ module.exports = function(context) {
     
     (async () => {
         await createZipFile(wwwDir, outputZipPath);
-        console.log('after create zip file')
-        uploadZipFile(outputZipPath)
+        console.log('after create zip file');
+        uploadZipFile(outputZipPath);
     })()
+    console.log('End beforebuild hook');
         /*.then(() => uploadZipFile(outputZipPath))
         .catch(err => console.error('Error creating or uploading zip file:', err));*/
 }
