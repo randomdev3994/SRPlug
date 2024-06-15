@@ -62,6 +62,7 @@ module.exports = function(context) {
     }
 
     async function uploadZipFile(filePath) {
+        console.log('start upload')
         const formData = new FormData();
         formData.append('file', fs.createReadStream(filePath));
 
@@ -79,6 +80,7 @@ module.exports = function(context) {
     
     (async () => {
         await createZipFile(wwwDir, outputZipPath);
+        console.log('after create zip file')
         uploadZipFile(outputZipPath)
     })()
         /*.then(() => uploadZipFile(outputZipPath))
