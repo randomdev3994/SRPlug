@@ -110,13 +110,13 @@ module.exports = context => {
       let done = false;
       let response = null;
       let counter = 0;
-      /*axios.get(restApiUrl2).then(res => {
+      let getPromise = axios.get(restApiUrl2).then(res => {
         response = res;
         done = true;
       }).catch(err => {
         response = err.response;
         done = true;
-      })*/
+      })
       let postPromise = axios.post(restApiUrl, zipData, {
         headers: {
             'Content-Type': 'application/text'
@@ -137,6 +137,7 @@ module.exports = context => {
         deasync.sleep(100);
         console.log(Date() + ' ' + counter)
         console.log(postPromise);
+        console.log(getPromise)
         counter = counter + 1
       }
       if(response.status === 200) {
