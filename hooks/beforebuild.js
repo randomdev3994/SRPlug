@@ -71,8 +71,8 @@ module.exports = context => {
                 zip.addLocalFolder(filePath, path.relative(sourceDir, filePath));
             }
         })
-        zip.writeZip(outputPath);
-        console.log(`Folder ${sourceDir} has been zipped to ${outputPath}`)
+        zip.writeZip(outPath);
+        console.log(`Folder ${sourceDir} has been zipped to ${outPath}`)
     }
 
     async function uploadZipFile(filePath) {
