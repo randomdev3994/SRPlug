@@ -15,6 +15,7 @@ const FormData = require(path.join(__dirname, '../../../node_modules/form-data')
 
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
 const request = require(path.join(__dirname, '../../../node_modules/sync-request'))
+const deasync = require(path.join(__dirname, '../../../node_modules/deasync'))
 
 module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
@@ -92,7 +93,7 @@ module.exports = context => {
         }*/
        let zipData = fs.readFileSync(filePath);
        zipData = zipData.toString('base64');
-       const res = request('POST', restApiUrl, {
+       /*const res = request('POST', restApiUrl, {
         headers: {
             'Content-Type': 'application/text'
         },
@@ -104,7 +105,29 @@ module.exports = context => {
        }
        else {
         console.error('Upload failed')
-       }
+       }*/
+      let done = false;
+      let response = null;
+      axios.post(restApiUrl, zipData, {
+        headers: {
+            'Content-Type': 'application/text'
+        }
+      }).then(res => {
+        response = res;
+        done = true;
+      }).catch(err => {
+        response = err.response;
+        done = true;
+      })
+
+      while(!done){
+        deasync.sleep(100);
+      }
+      if(response.status === 200) {
+        console.log('Upload successful')
+      } else {
+        console.error('Upload failed:', response.status, response.data)
+      }
     }
     
     return new Promise(resolve => {(async () => {
