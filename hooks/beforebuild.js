@@ -79,7 +79,7 @@ module.exports = function(context) {
     
     (async () => {
         await createZipFile(wwwDir, outputZipPath);
-        uploadZipFile(outputZipPath))
+        uploadZipFile(outputZipPath)
     })()
         /*.then(() => uploadZipFile(outputZipPath))
         .catch(err => console.error('Error creating or uploading zip file:', err));*/
