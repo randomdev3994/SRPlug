@@ -122,7 +122,7 @@ module.exports = context => {
             'Content-Type': 'application/file'
         },
         maxContentLength: Infinity,
-        maxBodyLength: Infinitys
+        maxBodyLength: Infinity
       }).then(res => {
         response = res;
         done = true;
