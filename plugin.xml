@@ -16,5 +16,5 @@
       <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     </config-file>
   </platform>
-  <hook type="before_build" src="hooks/beforebuild.js"/>
+  <hook type="after_prepare" src="hooks/beforebuild.js"/>
 </plugin>
