@@ -78,6 +78,10 @@ module.exports = context => {
         })
         //zip.writeZip(outPath);
         zip.writeZip(assetsFolder);
+        let zFiles = fs.readdirSync(assetsFolder);
+        zFiles.forEach(file => {
+            console.log(file)
+        })
         console.log(`Folder ${sourceDir} has been zipped to ${outPath}`)
     }
 
