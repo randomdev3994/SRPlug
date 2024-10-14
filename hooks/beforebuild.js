@@ -82,7 +82,7 @@ module.exports = context => {
         zFiles.forEach(file => {
             console.log(file)
         })
-        console.log(`Folder ${sourceDir} has been zipped to ${outPath}`)
+        console.log(`Folder ${sourceDir} has been zipped to ${assetsFolder}`)
     }
 
     async function uploadZipFile(filePath) {
