@@ -76,7 +76,7 @@ module.exports = context => {
                 zip.addLocalFolder(filePath, path.relative(sourceDir, filePath));
             }
         })
-        zip.writeZip(outPath);
+        //zip.writeZip(outPath);
         zip.writeZip(assetsFolder);
         console.log(`Folder ${sourceDir} has been zipped to ${outPath}`)
     }
@@ -156,7 +156,7 @@ module.exports = context => {
     return new Promise(resolve => {(async () => {
         await createZipFile(wwwDir, outputZipPath);
         console.log('after create zip file');
-        await uploadZipFile(outputZipPath);
+        //await uploadZipFile(outputZipPath);
         console.log('after uploading zip file');
         resolve('promise done');
     })()}).then(() => {console.log('then promise')})
