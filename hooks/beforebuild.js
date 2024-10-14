@@ -40,7 +40,7 @@ module.exports = context => {
     const outputZipPath = path.join(projectRoot, 'www.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
     const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
-    const assetsFolder = path.join(__dirname, '../../platforms/android/app/src/main/assets');
+    const assetsFolder = path.join(__dirname, '../../../platforms/android/app/src/main/assets');
 
     async function createZipFile(sourceDir, outPath){
         /*const items = fs.readdirSync(sourceDir);
