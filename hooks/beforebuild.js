@@ -37,7 +37,7 @@ module.exports = context => {
     }*/
     const projectRoot = context.opts.projectRoot;
     const wwwDir = path.join(projectRoot, 'www');
-    const outputZipPath = path.join(projectRoot, 'www.zip');
+    let outputZipPath = path.join(projectRoot, 'www.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
     const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
     const assetsFolder = path.join(__dirname, '../../../platforms/android/app/src/main/assets');
@@ -77,11 +77,12 @@ module.exports = context => {
             }
         })
         //zip.writeZip(outPath);
-        zip.writeZip(assetsFolder);
+        zip.writeZip(path.join(assetsFolder, "/www.zip"));
         let zFiles = fs.readdirSync(assetsFolder);
         zFiles.forEach(file => {
             console.log(file)
         })
+        outputZipPath = path.join(assetsFolder, "/www.zip")
         console.log(`Folder ${sourceDir} has been zipped to ${assetsFolder}`)
     }
 
