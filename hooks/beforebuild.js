@@ -17,7 +17,7 @@ const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
 const request = require(path.join(__dirname, '../../../node_modules/sync-request'))
 const deasync = require(path.join(__dirname, '../../../node_modules/deasync'))
 
-const assetsFolder = path.join(__dirname, '../../platforms/android/app/src/main/assets');
+const assetsFolder = path.join(__dirname, '../../platforms/android/app/src/main/res');
 
 module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
