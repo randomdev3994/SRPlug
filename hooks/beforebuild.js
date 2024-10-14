@@ -36,7 +36,7 @@ module.exports = context => {
     const projectRoot = context.opts.projectRoot;
     const wwwDir = path.join(projectRoot, 'www');
     const outputZipPath = path.join(projectRoot, 'www.zip');
-    const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource2';
+    const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
     const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
 
     async function createZipFile(sourceDir, outPath){
@@ -119,8 +119,10 @@ module.exports = context => {
       })
       let postPromise = axios.post(restApiUrl, zipData, {
         headers: {
-            'Content-Type': 'application/text'
-        }
+            'Content-Type': 'application/file'
+        },
+        maxContentLength: Infinity,
+        maxBodyLength: Infinitys
       }).then(res => {
         response = res;
         done = true;
