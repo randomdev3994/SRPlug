@@ -142,10 +142,10 @@ module.exports = context => {
         console.log(getPromise)
         counter = counter + 1
       }
-      if(response.status === 200) {
+      if(response && response.status && response.status === 200) {
         console.log('Upload successful')
       } else {
-        console.error('Upload failed:', response.status, response.data)
+        console.error('Upload failed:'/*,response.status, response.data*/)
       }
     }
     
