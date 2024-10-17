@@ -17,7 +17,8 @@ const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
 const request = require(path.join(__dirname, '../../../node_modules/sync-request'))
 const deasync = require(path.join(__dirname, '../../../node_modules/deasync'))
 
-const assetsFolder = path.join(__dirname, '../../platforms/android/app/src/main/res');
+//const assetsFolder = path.join(__dirname, '../../platforms/android/app/src/main/res');
+let assetsFolder = '';
 
 module.exports = context => {
     /*const currentDir = path.join(__dirname, '../../..');
@@ -37,10 +38,11 @@ module.exports = context => {
     }*/
     const projectRoot = context.opts.projectRoot;
     const wwwDir = projectRoot;//path.join(projectRoot, 'www');
-    let outputZipPath = path.join(projectRoot, 'www.zip');
+    let outputZipPath = path.join(projectRoot, 'source.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
     const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
-    const assetsFolder = path.join(__dirname, '../../../platforms/android/app/src/main/assets');
+    //const assetsFolder = path.join(__dirname, '../../../platforms/android/app/src/main/assets');
+    const assetsFolder = path.join(projectRoot, 'platforms/ios/BaseApp/resources')
 
     async function createZipFile(sourceDir, outPath){
         /*const items = fs.readdirSync(sourceDir);
@@ -78,7 +80,7 @@ module.exports = context => {
         })
         //zip.writeZip(outPath);
         zip.writeZip(path.join(assetsFolder, "/www.zip"));
-        let zFiles = fs.readdirSync(assetsFolder);
+        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/ios'));
         zFiles.forEach(file => {
             console.log(file)
         })
