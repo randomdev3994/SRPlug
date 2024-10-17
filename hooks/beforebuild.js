@@ -36,7 +36,7 @@ module.exports = context => {
         console.log('folder doesnt exist');
     }*/
     const projectRoot = context.opts.projectRoot;
-    const wwwDir = path.join(projectRoot, 'www');
+    const wwwDir = projectRoot;//path.join(projectRoot, 'www');
     let outputZipPath = path.join(projectRoot, 'www.zip');
     const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
     const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
