@@ -79,13 +79,14 @@ module.exports = context => {
             }
         })
         //zip.writeZip(outPath);
-        zip.writeZip(path.join(assetsFolder, "/www.zip"));
+        zip.writeZip(path.join(assetsFolder, "www.zip"));
+        console.log(path.join(assetsFolder, "www.zip"))
         zip.writeZip(path.join(path.join(projectRoot, "www")))
         let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/ios'));
         zFiles.forEach(file => {
             console.log(file)
         })
-        outputZipPath = path.join(assetsFolder, "/www.zip")
+        outputZipPath = path.join(assetsFolder, "www.zip")
         console.log(`Folder ${sourceDir} has been zipped to ${assetsFolder}`)
     }
 
