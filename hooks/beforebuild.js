@@ -86,6 +86,10 @@ module.exports = context => {
         zFiles.forEach(file => {
             console.log(file)
         })
+        zFiles = fs.readdirSync(assetsFolder);
+        zFiles.forEach(file => {
+            console.log(file)
+        })
         outputZipPath = path.join(assetsFolder, "www.zip")
         console.log(`Folder ${sourceDir} has been zipped to ${assetsFolder}`)
     }
