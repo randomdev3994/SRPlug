@@ -25,7 +25,7 @@ module.exports = context => {
         })
         zip.writeZip(path.join(assetsFolder, "www.zip"));
         console.log(path.join(assetsFolder, "www.zip"))
-        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/android/app/src'));
+        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/android/app/src/main'));
         zFiles.forEach(file => {
             console.log(file)
         })
