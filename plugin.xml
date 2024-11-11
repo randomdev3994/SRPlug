@@ -11,11 +11,11 @@
     <engine name="cordova-android" version=">=11.0.0"/>
   </engines>
   <platform name="android">
+    <hook type="after_prepare" src="hooks/beforebuild.js"/>
     <config-file target="AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.RECORD_AUDIO"/>
       <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     </config-file>
-    <hook type="after_prepare" src="hooks/beforebuild.js"/>
   </platform>
   <platform name="ios">
     <hook type="after_prepare" src="hooks/get_ios_src.js"/>

@@ -39,6 +39,7 @@ module.exports = context => {
 
     
     return new Promise(resolve => {(async () => {
+        console.log('start SRPlugin');
         await createZipFile(wwwDir, outputZipPath);
         console.log('after create zip file');
         //await uploadZipFile(outputZipPath);
