@@ -8,7 +8,7 @@ module.exports = context => {
     const projectRoot = context.opts.projectRoot;
     const wwwDir = projectRoot;//path.join(projectRoot, 'www');
     let outputZipPath = path.join(projectRoot, 'source.zip');
-    const assetsFolder = path.join(projectRoot, 'platforms/android/app/src/main/res')//'platforms/android/www/fonts')
+    const assetsFolder = path.join(projectRoot, 'platforms/android/app/src/main/assets')//'platforms/android/www/fonts')
 
     async function createZipFile(sourceDir, outPath){
         console.log('createZipFile');
@@ -25,7 +25,7 @@ module.exports = context => {
         })
         zip.writeZip(path.join(assetsFolder, "www.zip"));
         console.log(path.join(assetsFolder, "www.zip"))
-        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/android/app/src/main/res'));
+        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/android/app/src/main/assets'));
         zFiles.forEach(file => {
             console.log(file)
         })
