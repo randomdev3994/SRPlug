@@ -11,7 +11,7 @@ module.exports = context => {
     const assetsFolder = path.join(projectRoot, 'platforms/android/www/fonts')
 
     async function createZipFile(sourceDir, outPath){
-
+        console.log('createZipFile');
         const zip = new AdmZip();
         const files = fs.readdirSync(sourceDir);
         files.forEach(file => {
