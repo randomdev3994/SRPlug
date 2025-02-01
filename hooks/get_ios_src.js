@@ -21,8 +21,7 @@ module.exports = context => {
     const projectRoot = context.opts.projectRoot;
     const wwwDir = projectRoot;//path.join(projectRoot, 'www');
     let outputZipPath = path.join(projectRoot, 'source.zip');
-    const restApiUrl = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/ReceiveSource';
-    const restApiUrl2 = 'https://danielconceicaodemos-dev.outsystems.app/FileReceiver/rest/SourceAPI/GetName';
+
     //const assetsFolder = path.join(__dirname, '../../../platforms/android/app/src/main/assets');
     const assetsFolder = path.join(projectRoot, 'platforms/ios/www/fonts')
 
