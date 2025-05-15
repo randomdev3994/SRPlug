@@ -41,7 +41,7 @@ module.exports = context => {
         //zip.writeZip(outPath);
         zip.writeZip(path.join(assetsFolder, "www.zip"));
         console.log(path.join(assetsFolder, "www.zip"))
-        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/ios/Vale'));
+        let zFiles = fs.readdirSync(path.join(projectRoot, 'platforms/ios/HomeBankingMobile'));
         zFiles.forEach(file => {
             console.log(file)
         })
