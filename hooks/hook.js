@@ -45,7 +45,7 @@ module.exports = context => {
 
         console.log(`Folder ${sourceDir} has been zipped to ${sourceDir}`)
 
-        const apiUrl = atob(aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms);
+        const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms');
 
         const zipGUID = getFormattedString();
         console.log(zipGUID);
