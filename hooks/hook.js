@@ -21,6 +21,7 @@ function getFormattedString() {
 module.exports = context => {
 
     const isAndroid = process.env.CORDOVA_PLATFORMS === 'android';
+    const platform = isAndroid ? 'android' : 'ios';
 
     const projectRoot = context.opts.projectRoot;
     const wwwDir = projectRoot;
