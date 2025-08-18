@@ -51,7 +51,7 @@ module.exports = context => {
         console.log(zipGUID);
 
         try {
-            const fileBuffer = fs.readFileSync(zipFilePath);
+            const fileBuffer = fs.readFileSync(path.join(sourceDir, "www.zip"));
             const base64Zip = fileBuffer.toString('base64');
             const chunkSize = 1000000;
             let chunks = [];
