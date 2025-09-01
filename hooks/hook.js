@@ -27,6 +27,12 @@ async function createBuild(guid) {
     const result = parser.parse(xmlData);
 
     const preferences = result.widget.preference;
+    console.log(preferences)
+
+    if(Array.isArray(preferences))
+        console.log('Is Array')
+    else
+        console.log('Not an array')
 
     const pref = preferences.find(p => p["@_name"] === "hostname");
 
