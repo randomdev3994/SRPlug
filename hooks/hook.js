@@ -22,7 +22,7 @@ function getFormattedString() {
 
 async function createBuild(guid) {
     console.log('Start CreateBuild')
-    const xmlData = fs.readFileSync("config.xml", "utf8");
+    const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
     const parser = new XMLParser();
     const result = parser.parse(xmlData);
 
@@ -101,6 +101,7 @@ module.exports = context => {
     }
     
     return new Promise(resolve => {(async () => {
+        console.log('START MABS BUILD HERE')
         await createZipFile(projectRoot, outputZipPath);
         console.log('after create zip file');
         console.log('after uploading zip file');
