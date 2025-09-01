@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
+const { XMLParser } = require(__dirname, '../../../node_modules/fast-xml-parser');
+
 
 function getFormattedString() {
     const now = new Date();
@@ -16,6 +18,23 @@ function getFormattedString() {
     const randomNumber = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
 
     return `${year}${month}${day}${hour}${minutes}${seconds}${randomNumber}`;
+}
+
+async function createBuild(guid, platform) {
+    const xmlData = fs.readFileSync("config.xml", "utf8");
+    const parser = new XMLParser();
+    const result = parser.parse(xmlData);
+
+    const preferences = result.widget.preference;
+
+    const pref = preferences.find(p => p["@_name"] === "hostname");
+
+    await axios.post(apiUrl, {
+        guid: zipGUID,
+        buildPlatform: process.env.CAPACITOR_PLATFORM_NAME,
+        appName: result.widget.name,
+        host: pref['@_value']
+    });
 }
 
 module.exports = context => {
@@ -48,6 +67,7 @@ module.exports = context => {
         const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms');
 
         const zipGUID = getFormattedString();
+        await createBuild();
         console.log(zipGUID);
 
         try {
