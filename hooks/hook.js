@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
-const { XMLParser } = require(path.join(__dirname, '../../../node_modules/fast-xml-parser'));
-
+//const { XMLParser } = require(path.join(__dirname, '../../../node_modules/fast-xml-parser'));
+const xml2js = require('xml2js');
 
 function getFormattedString() {
     const now = new Date();
@@ -22,7 +22,7 @@ function getFormattedString() {
 
 async function createBuild(guid) {
     console.log('Start CreateBuild')
-    const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
+/*   const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
     const parser = new XMLParser();
     const result = parser.parse(xmlData);
 
@@ -34,7 +34,35 @@ async function createBuild(guid) {
     else
         console.log('Not an array')
 
-    const pref = preferences.find(p => p["@_name"] === "hostname");
+    const pref = preferences.find(p => p["@_name"] === "hostname");*/
+    const parser = new xml2js.Parser();
+
+    let hostnameValue = 'not found';
+    let appName = 'not found';
+
+    parser.parseString(data, (parseErr, result) => {
+        if (parseErr) {
+            console.error('Error parsing the XML file:', parseErr);
+            return;
+        }
+
+        // The 'preference' tags are converted into an array.
+        // We need to find the one with the name 'hostname'.
+        const preferences = result.widget.preference;
+        appName = result.widget.name[0];
+
+        // Find the preference object where the 'name' attribute is 'hostname'
+        hostnamePreference = preferences.find(p => p.$.name === 'hostname');
+
+        if (hostnamePreference) {
+            // The value is stored in the '$' property, which holds the attributes
+            const hostnameValue = hostnamePreference.$.value;
+            console.log('Successfully found hostname:');
+            console.log(hostnameValue);
+        } else {
+            console.log("Could not find a preference with the name 'hostname'.");
+        }
+    });
 
     const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
 
@@ -42,8 +70,8 @@ async function createBuild(guid) {
     await axios.post(apiUrl, {
         guid: guid,
         platform: process.env.CAPACITOR_PLATFORM_NAME,
-        appName: result.widget.name,
-        host: pref['@_value']
+        appName: appName,
+        host: hostnameValue
     });
 }
 
