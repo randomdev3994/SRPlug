@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
-const { XMLParser } = require(__dirname, '../../../node_modules/fast-xml-parser');
+const XMLParser = require(__dirname, '../../../node_modules/fast-xml-parser');
 
 
 function getFormattedString() {
