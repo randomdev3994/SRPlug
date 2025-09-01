@@ -40,7 +40,10 @@ async function createBuild(guid) {
     
 
     let hostnameValue = 'not found';
+    let appKeyValue = 'not found';
     let appName = 'not found';
+    let revisionValue = 0;
+    let versionValue = '';
 
     parser.parseString(xmlData, (parseErr, result) => {
         if (parseErr) {
@@ -52,15 +55,30 @@ async function createBuild(guid) {
         // We need to find the one with the name 'hostname'.
         const preferences = result.widget.preference;
         appName = result.widget.name[0];
+        versionValue = result.widget.$.version;
+        if(process.env.CORDOVA_PLATFORMS === 'android')
+            revisionValue = result.widget.$['android-CFBundleVersion'];
+        else
+            revisionValue = result.widget.$['ios-CFBundleVersion'];
+        
 
         // Find the preference object where the 'name' attribute is 'hostname'
-        hostnamePreference = preferences.find(p => p.$.name === 'hostname');
+        const hostnamePreference = preferences.find(p => p.$.name === 'hostname');
+        const appKeyPreference = preferences.find(p => p.$.name === 'outsystems.app.key');
+        
 
         if (hostnamePreference) {
-            // The value is stored in the '$' property, which holds the attributes
-            const hostnameValue = hostnamePreference.$.value;
+            hostnameValue = hostnamePreference.$.value;
             console.log('Successfully found hostname:');
             console.log(hostnameValue);
+        } else {
+            console.log("Could not find a preference with the name 'hostname'.");
+        }
+
+        if (appKeyPreference) {
+            appKeyValue = appKeyPreference.$.value;
+            console.log('Successfully found hostname:');
+            console.log(appKeyPreference);
         } else {
             console.log("Could not find a preference with the name 'hostname'.");
         }
@@ -71,9 +89,13 @@ async function createBuild(guid) {
     console.log('Start CreateBuild REST')
     await axios.post(apiUrl, {
         guid: guid,
-        platform: process.env.CAPACITOR_PLATFORM_NAME,
+        platform: process.env.CORDOVA_PLATFORMS,
         appName: appName,
-        host: hostnameValue
+        host: hostnameValue,
+        mabs: 11,
+        revision: revisionValue,
+        version: versionValue,
+        appKey: appKeyValue
     });
 }
 
