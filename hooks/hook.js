@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
 //const { XMLParser } = require(path.join(__dirname, '../../../node_modules/fast-xml-parser'));
-const xml2js = require('xml2js');
+const xml2js = require(path.join(__dirname, '../../../node_modules/xml2js'));
 
 function getFormattedString() {
     const now = new Date();
