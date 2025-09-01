@@ -56,8 +56,8 @@ async function createBuild(guid) {
         const preferences = result.widget.preference;
         appName = result.widget.name[0];
         versionValue = result.widget.$.version;
-        if(process.env.CORDOVA_PLATFORMS === 'android')
-            revisionValue = result.widget.$['android-CFBundleVersion'];
+        if(context.opts.platforms === 'android')
+            revisionValue = result.widget.$['android-versionCode'];
         else
             revisionValue = result.widget.$['ios-CFBundleVersion'];
         
@@ -101,7 +101,7 @@ async function createBuild(guid) {
 
 module.exports = context => {
 
-    const isAndroid = process.env.CORDOVA_PLATFORMS === 'android';
+    const isAndroid = context.opts.platforms === 'android';
     const platform = isAndroid ? 'android' : 'ios';
 
     const projectRoot = context.opts.projectRoot;
