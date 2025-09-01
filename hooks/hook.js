@@ -35,12 +35,14 @@ async function createBuild(guid) {
         console.log('Not an array')
 
     const pref = preferences.find(p => p["@_name"] === "hostname");*/
+    const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
     const parser = new xml2js.Parser();
+    
 
     let hostnameValue = 'not found';
     let appName = 'not found';
 
-    parser.parseString(data, (parseErr, result) => {
+    parser.parseString(xmlData, (parseErr, result) => {
         if (parseErr) {
             console.error('Error parsing the XML file:', parseErr);
             return;
