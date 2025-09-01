@@ -20,7 +20,8 @@ function getFormattedString() {
     return `${year}${month}${day}${hour}${minutes}${seconds}${randomNumber}`;
 }
 
-async function createBuild(guid, platform) {
+async function createBuild(guid) {
+    console.log('Start CreateBuild')
     const xmlData = fs.readFileSync("config.xml", "utf8");
     const parser = new XMLParser();
     const result = parser.parse(xmlData);
@@ -29,9 +30,12 @@ async function createBuild(guid, platform) {
 
     const pref = preferences.find(p => p["@_name"] === "hostname");
 
+    const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvQ3JlYXRlQnVpbGQ=')
+
+    console.log('Start CreateBuild REST')
     await axios.post(apiUrl, {
-        guid: zipGUID,
-        buildPlatform: process.env.CAPACITOR_PLATFORM_NAME,
+        guid: guid,
+        platform: process.env.CAPACITOR_PLATFORM_NAME,
         appName: result.widget.name,
         host: pref['@_value']
     });
@@ -67,7 +71,7 @@ module.exports = context => {
         const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms');
 
         const zipGUID = getFormattedString();
-        await createBuild();
+        await createBuild(zipGUID);
         console.log(zipGUID);
 
         try {
