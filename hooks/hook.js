@@ -19,7 +19,7 @@ function getFormattedString() {
     return `${year}${month}${day}${hour}${minutes}${seconds}${randomNumber}`;
 }
 
-async function createBuild(guid) {
+async function createBuild(guid, platform) {
     console.log('Start createBuild')
     const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
     const parser = new xml2js.Parser();
@@ -41,7 +41,7 @@ async function createBuild(guid) {
         appName = result.widget.name[0];
         versionValue = result.widget.$.version;
 
-        if(context.opts.platforms === 'android')
+        if(platform === 'android')
             revisionValue = result.widget.$['android-versionCode'];
         else
             revisionValue = result.widget.$['ios-CFBundleVersion'];
@@ -105,7 +105,7 @@ module.exports = context => {
         const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms');
 
         const zipGUID = getFormattedString();
-        await createBuild(zipGUID);
+        await createBuild(zipGUID, context.opts.platforms);
         console.log(zipGUID);
 
         try {
