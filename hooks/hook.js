@@ -71,7 +71,7 @@ async function createBuild(guid, platform) {
     console.log('Start CreateBuild REST')
     await axios.post(apiUrl, {
         guid: guid,
-        platform: process.env.CORDOVA_PLATFORMS,
+        platform: platform,
         appName: appName,
         host: hostnameValue,
         mabs: 11,
@@ -124,7 +124,7 @@ module.exports = context => {
                 index: curIndex,
                 totalChunks: chunks.length,
                 guid: zipGUID,
-                buildPlatform: process.env.CAPACITOR_PLATFORM_NAME
+                buildPlatform: context.opts.platforms
             });
             uploadPromises.push(promise)
         }
