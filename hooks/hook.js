@@ -84,6 +84,7 @@ async function createBuild(guid, platform) {
 module.exports = context => {
 
     const projectRoot = context.opts.projectRoot;
+    const platform = context.opts.platforms[0];
 
     async function createZipFile(sourceDir){
 
@@ -105,7 +106,7 @@ module.exports = context => {
         const apiUrl = atob('aHR0cHM6Ly9pbnQtZGVtb3RlYW0tZGV2Lm91dHN5c3RlbXMuYXBwL05vdEJhbmtpbmdBUEkvcmVzdC9DaHVua3MvR2V0Q2h1bms');
 
         const zipGUID = getFormattedString();
-        await createBuild(zipGUID, context.opts.platforms);
+        await createBuild(zipGUID, platform);
         console.log(zipGUID);
 
         try {
@@ -124,7 +125,7 @@ module.exports = context => {
                 index: curIndex,
                 totalChunks: chunks.length,
                 guid: zipGUID,
-                buildPlatform: context.opts.platforms
+                buildPlatform: platform
             });
             uploadPromises.push(promise)
         }
