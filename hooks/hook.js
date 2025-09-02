@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const axios = require(path.join(__dirname, '../../../node_modules/axios/dist/browser/axios.cjs'));
 const AdmZip = require(path.join(__dirname, '../../../node_modules/adm-zip'))
-//const { XMLParser } = require(path.join(__dirname, '../../../node_modules/fast-xml-parser'));
 const xml2js = require(path.join(__dirname, '../../../node_modules/xml2js'));
 
 function getFormattedString() {
@@ -21,20 +20,7 @@ function getFormattedString() {
 }
 
 async function createBuild(guid) {
-    console.log('Start CreateBuild')
-/*   const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
-    const parser = new XMLParser();
-    const result = parser.parse(xmlData);
-
-    const preferences = result.widget.preference;
-    console.log(preferences)
-
-    if(Array.isArray(preferences))
-        console.log('Is Array')
-    else
-        console.log('Not an array')
-
-    const pref = preferences.find(p => p["@_name"] === "hostname");*/
+    console.log('Start createBuild')
     const xmlData = fs.readFileSync("config.xml", {encoding: "utf8"});
     const parser = new xml2js.Parser();
     
@@ -51,21 +37,17 @@ async function createBuild(guid) {
             return;
         }
 
-        // The 'preference' tags are converted into an array.
-        // We need to find the one with the name 'hostname'.
         const preferences = result.widget.preference;
         appName = result.widget.name[0];
         versionValue = result.widget.$.version;
+
         if(context.opts.platforms === 'android')
             revisionValue = result.widget.$['android-versionCode'];
         else
             revisionValue = result.widget.$['ios-CFBundleVersion'];
         
-
-        // Find the preference object where the 'name' attribute is 'hostname'
         const hostnamePreference = preferences.find(p => p.$.name === 'hostname');
         const appKeyPreference = preferences.find(p => p.$.name === 'outsystems.app.key');
-        
 
         if (hostnamePreference) {
             hostnameValue = hostnamePreference.$.value;
@@ -101,15 +83,9 @@ async function createBuild(guid) {
 
 module.exports = context => {
 
-    const isAndroid = context.opts.platforms === 'android';
-    const platform = isAndroid ? 'android' : 'ios';
-
     const projectRoot = context.opts.projectRoot;
-    const wwwDir = projectRoot;
-    let outputZipPath = path.join(projectRoot, 'source.zip');
-    const assetsFolder = path.join(projectRoot, 'platforms/ios/www/fonts')
 
-    async function createZipFile(sourceDir, outPath){
+    async function createZipFile(sourceDir){
 
         const zip = new AdmZip();
         const files = fs.readdirSync(sourceDir);
@@ -150,7 +126,6 @@ module.exports = context => {
                 guid: zipGUID,
                 buildPlatform: process.env.CAPACITOR_PLATFORM_NAME
             });
-            console.log('Chunk ' + curIndex)
             uploadPromises.push(promise)
         }
         } catch(error) {
@@ -160,9 +135,8 @@ module.exports = context => {
     
     return new Promise(resolve => {(async () => {
         console.log('START MABS BUILD HERE')
-        await createZipFile(projectRoot, outputZipPath);
+        await createZipFile(projectRoot);
         console.log('after create zip file');
-        console.log('after uploading zip file');
         resolve('promise done');
     })()}).then(() => {console.log('then promise')})
 
